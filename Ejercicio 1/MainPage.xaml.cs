@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,13 +31,24 @@ namespace Ejercicio_1
 
         private void txtOrigen_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            //Falta Pad!!!
-            if (!char.IsControl((char) e.Key) && !char.IsDigit((char) e.Key))
-            {
-                e.Handled = true;
-            }else
+            /*
+            if (char.IsControl((char) e.Key) || char.IsDigit((char) e.Key)
+                || e.Key == VirtualKey.NumberPad0 || e.Key == VirtualKey.NumberPad1
+                || e.Key == VirtualKey.NumberPad2 || e.Key == VirtualKey.NumberPad3
+                || e.Key == VirtualKey.NumberPad4 || e.Key == VirtualKey.NumberPad5
+                || e.Key == VirtualKey.NumberPad6 || e.Key == VirtualKey.NumberPad7
+                || e.Key == VirtualKey.NumberPad8 || e.Key == VirtualKey.NumberPad9)
             {
                 e.Handled = false;
+            }else
+            {
+                e.Handled = true;
+            }*/
+            //Falla con ciertos carácteres
+            if (Regex.IsMatch(e.Key.ToString(),"[0-9]")){
+                e.Handled = false;
+            }else{
+                e.Handled = true;
             }
         }
     }

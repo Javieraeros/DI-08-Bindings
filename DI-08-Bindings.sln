@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio 1", "Ejercicio 1\Ejercicio 1.csproj", "{92DA8DCF-81EC-439C-98BD-2B0C1733806A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio 2", "Ejercicio 2\Ejercicio 2.csproj", "{2850A424-5894-4EE8-827F-DB4A61742009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,24 @@ Global
 		{92DA8DCF-81EC-439C-98BD-2B0C1733806A}.Release|x86.ActiveCfg = Release|x86
 		{92DA8DCF-81EC-439C-98BD-2B0C1733806A}.Release|x86.Build.0 = Release|x86
 		{92DA8DCF-81EC-439C-98BD-2B0C1733806A}.Release|x86.Deploy.0 = Release|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|ARM.Build.0 = Debug|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x64.ActiveCfg = Debug|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x64.Build.0 = Debug|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x64.Deploy.0 = Debug|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x86.ActiveCfg = Debug|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x86.Build.0 = Debug|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Debug|x86.Deploy.0 = Debug|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|ARM.ActiveCfg = Release|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|ARM.Build.0 = Release|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|ARM.Deploy.0 = Release|ARM
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x64.ActiveCfg = Release|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x64.Build.0 = Release|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x64.Deploy.0 = Release|x64
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x86.ActiveCfg = Release|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x86.Build.0 = Release|x86
+		{2850A424-5894-4EE8-827F-DB4A61742009}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
