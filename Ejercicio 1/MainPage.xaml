@@ -8,6 +8,25 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Slider Name="sldOrigen" 
+                Minimum="1" Maximum="100"
+                TickFrequency="1" TickPlacement="BottomRight" SnapsTo="Ticks"
+                Grid.Row="0" 
+                Value="10"/>
+        <TextBlock Name="lblOrigen" 
+                   Grid.Row="1"
+                   Text="Hola Fernando" 
+                   FontSize="{x:Bind Path=sldOrigen.Value,Mode=OneWay}"/>
+        <TextBox Name="txtOrigen" 
+                 Grid.Row="2" 
+                 KeyDown="txtOrigen_KeyDown"   
+                 Text="{Binding ElementName=sldOrigen, Path=Value ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
     </Grid>
 </Page>

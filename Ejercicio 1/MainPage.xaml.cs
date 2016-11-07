@@ -26,5 +26,17 @@ namespace Ejercicio_1
         {
             this.InitializeComponent();
         }
+
+        private void txtOrigen_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            //Falta Pad!!!
+            if (!char.IsControl((char) e.Key) && !char.IsDigit((char) e.Key))
+            {
+                e.Handled = true;
+            }else
+            {
+                e.Handled = false;
+            }
+        }
     }
 }
