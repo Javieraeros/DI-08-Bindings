@@ -1,31 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Ejercicio_2
 {
     /// <summary>
-    /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
+    /// Clase de utilidades de prueba, no se debe usar así
     /// </summary>
-    public sealed partial class MainPage : Page
+    public class ListadoPersona
     {
-        private List<Persona> listado = new List<Persona>();
-        public MainPage()
+        private ObservableCollection<Persona> listado = new ObservableCollection<Persona>();
+        
+        public  ListadoPersona()
         {
-            this.InitializeComponent();
             Persona Fernando = new Persona(0, "Fernando", "Galiana", new DateTime(1980, 12, 12), "Su casa", "Su teléfono");
             Persona Yo = new Persona(1, "Francisco Javier", "Ruiz", new DateTime(1992, 11, 19), "Mi casa", "Teléeeeefono");
             Persona Tu = new Persona(2, "Lector", "Intrépido", new DateTime(1935, 5, 4), "Tu casa", "Tu teléfono");
@@ -35,9 +23,18 @@ namespace Ejercicio_2
             listado.Add(Fernando); listado.Add(Yo);
             listado.Add(Tu); listado.Add(El);
             listado.Add(Ella);
-            foreach(Persona p in listado)
+        }
+        
+        public void aniadePersona(Persona ps)
+        {
+            listado.Add(ps);
+        }
+
+        public ObservableCollection<Persona> Listado
+        {
+            get
             {
-                lstPersonas.Items.Add(p.toString());
+                return listado;
             }
         }
     }

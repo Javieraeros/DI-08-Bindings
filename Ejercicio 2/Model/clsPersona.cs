@@ -40,7 +40,7 @@ namespace Ejercicio_2
             this.direccion = direccion;
         }
 
-        public string toString()
+        public override string ToString()
         {
             return Nombre + " " + Apellidos;
         }

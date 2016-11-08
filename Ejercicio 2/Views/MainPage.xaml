@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="Ejercicio_2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Ejercicio_2"
+    xmlns:vm="using:Ejercicio_2.ViewModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:MainPageVM></vm:MainPageVM>
+    </Page.DataContext>
+    <RelativePanel Name="lytPrincipal" 
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView Name="lstPersonas"
+                  RelativePanel.AlignTopWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="False"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  ItemsSource="{Binding Listado}">
+        </ListView>
+        <Grid RelativePanel.RightOf="lstPersonas"
+              RelativePanel.AlignTopWithPanel="True"
+              RelativePanel.AlignBottomWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <!--Nombre-->
+            <TextBlock Name="Nombre" Text="Nombre" 
+                       Grid.Column="0" Grid.Row="0"/>
+            <TextBox Name="txtNombre" Text=""
+                     Grid.Column="1" Grid.Row="0"/>
+
+            <!--Apellidos-->
+            <TextBlock Name="Apellidos" Text="Apellidos" 
+                       Grid.Column="0" Grid.Row="1"/>
+            <TextBox Name="txtApellidos" Text="" 
+                       Grid.Column="1" Grid.Row="1"/>
+            
+            <!--Fecha de Nacimiento-->
+            <TextBlock Name="FechaNacimiendo" Text="Fecha de Nacimiendo" 
+                       Grid.Column="0" Grid.Row="2"/>
+            <TextBox Name="txtFechaNacimiento" Text="" 
+                       Grid.Column="1" Grid.Row="2"/>
+            <!--Dirección-->
+            <TextBlock Name="Dirección" Text="Dirección" 
+                       Grid.Column="0" Grid.Row="3"/>
+            <TextBox Name="txtDiorección" Text="" 
+                       Grid.Column="1" Grid.Row="3"/>
+
+            <!--Teléfono-->
+            <TextBlock Name="Teléfono" Text="Teléfono" 
+                       Grid.Column="0" Grid.Row="4"/>
+            <TextBox Name="txtTeléfono" Text=""
+                     Grid.Row="5"
+                     Grid.ColumnSpan="2"/>
+        </Grid>
+
+    </RelativePanel>
+</Page>
