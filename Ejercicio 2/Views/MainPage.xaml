@@ -31,6 +31,7 @@
                         <Setter Target="lstPersonas.(RelativePanel.AlignTopWithPanel)" Value="False"/>
                         <Setter Target="lstPersonas.(RelativePanel.Below)" Value="Save"/>
                         <Setter Target="lstPersonas.(RelativePanel.AlignBottomWithPanel)" Value="False"/>
+                        <Setter Target="lstPersonas.MaxHeight" Value="100"/>
 
                         <Setter Target="MiGrid.(RelativePanel.AlignRightWithPanel)" Value="true"/>
                         <Setter Target="MiGrid.(RelativePanel.AlignLeftWithPanel)" Value="true"/>
@@ -42,23 +43,25 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-
-        <ListView Name="lstPersonas"
-                  RelativePanel.AlignTopWithPanel="True"
-                  RelativePanel.AlignLeftWithPanel="True"
-                  RelativePanel.AlignRightWithPanel="False"
-                  RelativePanel.AlignBottomWithPanel="True"
-                  ItemsSource="{Binding Listado}" 
-                  SelectedItem="{Binding PersonaSeleccionada,Mode=TwoWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Nombre}"/>
-                        <TextBlock Text="{Binding Apellidos}" Margin="3,0,0,0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ScrollViewer Name="lstPersonas"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="False"
+                      RelativePanel.AlignBottomWithPanel="True">
+            <ListView Name="lista"
+                      
+                      ItemsSource="{Binding Listado}" 
+                      SelectedItem="{Binding PersonaSeleccionada,Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Nombre}"/>
+                            <TextBlock Text="{Binding Apellidos}" Margin="3,0,0,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
         <AppBarButton Name="Save" 
                       Icon="Save" 
                       Margin="5" 
