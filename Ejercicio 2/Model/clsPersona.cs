@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_2
 {
-    public class Persona
+    //INotifyPropertyChanged solo para que los cambios del formulario
+    public class Persona :INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [Required]
-        public string Nombre { get; set; }
+        private string nombre;
         public string Apellidos { get; set; }
         [Display (Name="Fecha de Nacimiento")]
         public DateTime FechaNac { get; set; }
@@ -19,6 +23,21 @@ namespace Ejercicio_2
         [Display (Name ="Teléfono")]
         public string telefono { get; set; }
         public string direccion { get; set; }
+
+
+        public string Nombre
+        {
+            get
+            {
+                return nombre;
+            }
+            set
+            {
+                this.nombre = value;
+                onPropertyChanged("Nombre");
+            }
+        }
+
 
         public Persona(){
             id = 0;
@@ -43,6 +62,15 @@ namespace Ejercicio_2
         public override string ToString()
         {
             return Nombre + " " + Apellidos;
+        }
+
+        protected void onPropertyChanged(String name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

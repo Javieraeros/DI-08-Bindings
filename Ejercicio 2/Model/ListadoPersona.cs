@@ -10,10 +10,10 @@ namespace Ejercicio_2
     /// </summary>
     public class ListadoPersona
     {
-        private ObservableCollection<Persona> listado = new ObservableCollection<Persona>();
-        
-        public  ListadoPersona()
+     
+        public ObservableCollection<Persona> getListado()
         {
+            ObservableCollection<Persona> listado = new ObservableCollection<Persona>();
             Persona Fernando = new Persona(0, "Fernando", "Galiana", new DateTime(1980, 12, 12), "Su casa", "Su teléfono");
             Persona Yo = new Persona(1, "Francisco Javier", "Ruiz", new DateTime(1992, 11, 19), "Mi casa", "Teléeeeefono");
             Persona Tu = new Persona(2, "Lector", "Intrépido", new DateTime(1935, 5, 4), "Tu casa", "Tu teléfono");
@@ -23,19 +23,7 @@ namespace Ejercicio_2
             listado.Add(Fernando); listado.Add(Yo);
             listado.Add(Tu); listado.Add(El);
             listado.Add(Ella);
-        }
-        
-        public void aniadePersona(Persona ps)
-        {
-            listado.Add(ps);
-        }
-
-        public ObservableCollection<Persona> Listado
-        {
-            get
-            {
-                return listado;
-            }
+            return listado;
         }
     }
 }

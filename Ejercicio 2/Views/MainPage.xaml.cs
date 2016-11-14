@@ -34,5 +34,14 @@ namespace Ejercicio_2
                 lstPersonas.Items.Add(p.toString());
             }*/
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            this.txtNombre.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.txtApellidos.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.txtFechaNacimiento.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.txtDiorección.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.txtTeléfono.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
     }
 }
