@@ -74,6 +74,12 @@
                       Click="{x:Bind ViewModel.eliminar}" 
                       Margin="5" 
                       />
+            <AppBarButton Name="DeleteCommand" 
+                      Icon="Delete" 
+                      Label="Command"
+                      Command="{Binding eliminarCommand}" 
+                      Margin="5" 
+                      />
         </StackPanel>
         
         <Grid Name="MiGrid"

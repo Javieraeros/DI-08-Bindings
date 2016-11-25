@@ -8,17 +8,25 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_3.ViewModel
 {
-    public class MainPageVM : INotifyPropertyChanged
+    public class MainPageVM : clsVMBase
     {
+        #region "Atributos"
         private static Persona personaSeleccionada;
         private static ObservableCollection<Persona> listado;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private DelegateCommand _eliminarCommand;
 
+        #endregion
+
+        #region "Constructores"
         public MainPageVM()
         {
             listado = new ListadoPersona().getListado();
         }
+
+        #endregion
+
+        #region "Propiedades"
         public Persona PersonaSeleccionada
         {
             get
@@ -28,7 +36,7 @@ namespace Ejercicio_3.ViewModel
             set
             {
                 personaSeleccionada = value;
-                onPropertyChanged("PersonaSeleccionada");
+                NotifyPropertyChanged("PersonaSeleccionada");
             }
         }
 
@@ -44,20 +52,40 @@ namespace Ejercicio_3.ViewModel
             }
         }
 
-        protected void onPropertyChanged(String name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        #endregion
 
+        #region "Métodos"
         public void eliminar()
         {
             listado.Remove(personaSeleccionada);
         }
 
+
+        public DelegateCommand eliminarCommand
+        {
+            get
+            {
+                _eliminarCommand = new DelegateCommand(EliminarCommand_Execute, EliminarCommand_CanExecute);
+                return _eliminarCommand;
+            }
+        }
+
+        private bool EliminarCommand_CanExecute()
+        {
+            bool sePuedeBorrar = true;
+            if (personaSeleccionada == null)
+            {
+                sePuedeBorrar = false;
+            }
+            return sePuedeBorrar;
+        }
+
+        private void EliminarCommand_Execute()
+        {
+            listado.Remove(personaSeleccionada);
+        }
+
+        #endregion
     }
     /// <summary>
     /// Aquí se harán todos los cambios que queremos de la clase persona, como por ejemplo
