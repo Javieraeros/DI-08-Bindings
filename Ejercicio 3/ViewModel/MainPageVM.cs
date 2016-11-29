@@ -13,8 +13,15 @@ namespace Ejercicio_3.ViewModel
         #region "Atributos"
         private static Persona personaSeleccionada;
         private static ObservableCollection<Persona> listado;
+        //Esta copia no se modificará nunca, pues será donde guardemos todas las personas de la base de datos
+        //Mientras que en el otro, solo guardaremos lo que estamos mostrando
+        private static ObservableCollection<Persona> listadoCopia;
+        private string _textoABuscar;
+        private string _textoABuscarActualizable;
 
         private DelegateCommand _eliminarCommand;
+
+        private DelegateCommand _buscarCommand;
 
         #endregion
 
@@ -22,6 +29,10 @@ namespace Ejercicio_3.ViewModel
         public MainPageVM()
         {
             listado = new ListadoPersona().getListado();
+            //No pongo listadoCopia=listado; por si hace referencia
+            listadoCopia = new ListadoPersona().getListado();
+            _eliminarCommand = new DelegateCommand(EliminarCommand_Execute, EliminarCommand_CanExecute);
+            _buscarCommand = new DelegateCommand(BuscarCommand_Execute, BuscarCommand_CanExecute);
         }
 
         #endregion
@@ -36,6 +47,7 @@ namespace Ejercicio_3.ViewModel
             set
             {
                 personaSeleccionada = value;
+                _eliminarCommand.RaiseCanExecuteChanged();
                 NotifyPropertyChanged("PersonaSeleccionada");
             }
         }
@@ -49,6 +61,31 @@ namespace Ejercicio_3.ViewModel
             set
             {
                 listado = value;
+                NotifyPropertyChanged("Listado");
+            }
+        }
+
+        public string TextoABuscar
+        {
+            get{
+                return _textoABuscar;
+            }
+            set
+            {
+                _textoABuscar = value;
+            }
+        }
+
+        public string TextoABuscarActualizable
+        {
+            get
+            {
+                return _textoABuscarActualizable;
+            }
+            set
+            {
+                _textoABuscarActualizable = value;
+                listaActualizable();
             }
         }
 
@@ -65,8 +102,15 @@ namespace Ejercicio_3.ViewModel
         {
             get
             {
-                _eliminarCommand = new DelegateCommand(EliminarCommand_Execute, EliminarCommand_CanExecute);
                 return _eliminarCommand;
+            }
+        }
+
+        public DelegateCommand buscarCommand
+        {
+            get
+            {
+                return _buscarCommand;
             }
         }
 
@@ -85,6 +129,39 @@ namespace Ejercicio_3.ViewModel
             listado.Remove(personaSeleccionada);
         }
 
+        private bool BuscarCommand_CanExecute()
+        {
+            return true;
+        }
+
+        private void BuscarCommand_Execute()
+        {
+            if (!string.IsNullOrEmpty(_textoABuscar))
+            {
+
+                var _listaActualizada = from p in listadoCopia where p.Nombre.StartsWith(TextoABuscar) select p;
+                Listado = new ObservableCollection<Persona>(_listaActualizada);
+            }else
+            {
+                ListadoPersona listados = new ListadoPersona();
+                Listado = listados.getListado();
+            }
+        }
+
+        private void listaActualizable()
+        {
+            if (!string.IsNullOrEmpty(_textoABuscarActualizable))
+            {
+
+                var _listaActualizada = from p in listadoCopia where p.Nombre.StartsWith(TextoABuscarActualizable) select p;
+                Listado = new ObservableCollection<Persona>(_listaActualizada);
+            }
+            else
+            {
+                ListadoPersona listados = new ListadoPersona();
+                Listado = listados.getListado();
+            }
+        }
         #endregion
     }
     /// <summary>

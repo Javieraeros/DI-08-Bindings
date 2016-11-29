@@ -43,28 +43,50 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <!--Listado-->
         <ScrollViewer Name="lstPersonas"
-                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True"    
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignRightWithPanel="False"
                       RelativePanel.AlignBottomWithPanel="True">
-            <ListView Name="lista"
-                      
-                      ItemsSource="{Binding Listado}" 
-                      SelectedItem="{Binding PersonaSeleccionada,Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Nombre}"/>
-                            <TextBlock Text="{Binding Apellidos}" Margin="3,0,0,0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <StackPanel Orientation="Vertical">
+
+                <!--Búsqueda actualizable-->
+                <TextBox Name="TextoABuscarActualizable"
+                         Text="{Binding TextoABuscarActualizable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         />
+                <ListView Name="lista"
+                          ItemsSource="{Binding Listado}" 
+                          SelectedItem="{Binding PersonaSeleccionada,Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Nombre}"/>
+                                <TextBlock Text="{Binding Apellidos}" Margin="3,0,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackPanel>
         </ScrollViewer>
+        
+        <!--Texto a buscar con botón-->
+        <TextBox Name="TextoABuscar"
+                 Text="{Binding Path=TextoABuscar,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 RelativePanel.AlignTopWithPanel="True"
+                 RelativePanel.AlignBottomWith="Bar"
+                 RelativePanel.AlignLeftWith="MiGrid"
+                 RelativePanel.LeftOf="Bar"/>
+        
+        <!--Simulación de APP Bar-->
         <StackPanel Name="Bar" Orientation="Horizontal"
                     RelativePanel.AlignTopWithPanel="True" 
                     RelativePanel.AlignRightWithPanel="True">
+            <AppBarButton Name="Find"
+                          Icon="Find"
+                          Command="{Binding buscarCommand}" />
+
             <AppBarButton Name="Save" 
                       Icon="Save"
                       Margin="5"
@@ -82,6 +104,7 @@
                       />
         </StackPanel>
         
+        <!--Formulario-->
         <Grid Name="MiGrid"
               RelativePanel.RightOf="lstPersonas"
               RelativePanel.Below="Bar"
