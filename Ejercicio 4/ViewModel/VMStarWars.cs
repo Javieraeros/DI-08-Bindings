@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace Ejercicio_4.ViewModel
 {
@@ -20,6 +22,8 @@ namespace Ejercicio_4.ViewModel
         private ObservableCollection<Personaje> personajes;
         private Personaje personajeSeleccionado;
 
+        private MediaPlayerElement reproductor;
+
         #endregion
 
         #region Constructores
@@ -27,6 +31,7 @@ namespace Ejercicio_4.ViewModel
         {
             Listados recuperar = new Listados();
             trilogias = recuperar.devuelveTrilogia();
+            reproductor = new MediaPlayerElement();
 
         }
         #endregion
@@ -43,6 +48,17 @@ namespace Ejercicio_4.ViewModel
             {
                 personajeSeleccionado = value;
                 NotifyPropertyChanged("PersonajeSeleccionado");
+
+                //No es la mejor solución, puesto qeu lo que hago es pausar la música, y cuando vuelve a pinchar en el personaje
+                //Asigna la misma música de nuevo al reproductor, pero no hay otra opción puesto que no tenemos stop
+                if (PersonajeSeleccionado.Nombre.Equals("Darth"))
+                {
+                    reproductor.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/darth.mp3", UriKind.RelativeOrAbsolute));
+                    reproductor.MediaPlayer.Play();
+                }else
+                {
+                    reproductor.MediaPlayer.Pause();
+                }
             }
         }
 
