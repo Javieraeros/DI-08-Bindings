@@ -20,14 +20,14 @@ namespace Ejercicio_4.Model
             Personaje Luke = new Personaje("Luke", "Skywalker");
             Personaje Anakyn = new Personaje("Anakyn", "Skywalker");
             ObservableCollection<Personaje> segundaPersonaje = new ObservableCollection<Personaje>();
-            primeraPersonaje.Add(Luke);
-            primeraPersonaje.Add(Anakyn);
+            segundaPersonaje.Add(Luke);
+            segundaPersonaje.Add(Anakyn);
 
             Personaje Leia = new Personaje("Leia", "IDontKnow");
             Personaje Darth = new Personaje("Darth", "Vader");
             ObservableCollection<Personaje> terceraPersonaje = new ObservableCollection<Personaje>();
-            primeraPersonaje.Add(Leia);
-            primeraPersonaje.Add(Darth);
+            terceraPersonaje.Add(Leia);
+            terceraPersonaje.Add(Darth);
 
 
             Pelicula primera = new Pelicula("Primera",primeraPersonaje);

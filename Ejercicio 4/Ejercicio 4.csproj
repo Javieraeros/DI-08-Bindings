@@ -103,6 +103,7 @@
     <Compile Include="Model\Personaje.cs" />
     <Compile Include="Model\Trilogia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\VMStarWars.cs" />
   </ItemGroup>

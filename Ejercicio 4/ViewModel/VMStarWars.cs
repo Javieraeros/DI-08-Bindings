@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_4.ViewModel
 {
-    public class VMStarWars
+    public class VMStarWars:VMBase
     {
         #region Atributos
         private ObservableCollection<Trilogia> trilogias;
@@ -18,7 +18,7 @@ namespace Ejercicio_4.ViewModel
         private Pelicula peliculaSeleccionada;
 
         private ObservableCollection<Personaje> personajes;
-        private Pelicula personajeSeleccionado;
+        private Personaje personajeSeleccionado;
 
         #endregion
 
@@ -27,11 +27,12 @@ namespace Ejercicio_4.ViewModel
         {
             Listados recuperar = new Listados();
             trilogias = recuperar.devuelveTrilogia();
+
         }
         #endregion
 
         #region Propiedades
-        public Pelicula PersonajeSeleccionado
+        public Personaje PersonajeSeleccionado
         {
             get
             {
@@ -41,6 +42,7 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 personajeSeleccionado = value;
+                NotifyPropertyChanged("PersonajeSeleccionado");
             }
         }
 
@@ -54,6 +56,8 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 peliculaSeleccionada = value;
+                personajes = peliculaSeleccionada.Personajes;
+                NotifyPropertyChanged("Personajes");
             }
         }
 
@@ -67,6 +71,11 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 trilogiaSeleccionada = value;
+                peliculas = trilogiaSeleccionada.Peliculas;
+
+                //Importanet llamar a la propiedad pública que es la que notifica el cambio a la vista!!
+                Personajes = null; //Necesario por si cambiamos entre trilogías no se mantengan los personajes!
+                NotifyPropertyChanged("Peliculas");
             }
         }
 
@@ -80,6 +89,7 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 trilogias = value;
+                NotifyPropertyChanged("Trilogias");
             }
         }
 
@@ -93,6 +103,7 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 peliculas = value;
+                NotifyPropertyChanged("Peliculas");
             }
         }
 
@@ -106,6 +117,7 @@ namespace Ejercicio_4.ViewModel
             set
             {
                 personajes = value;
+                NotifyPropertyChanged("Personajes");
             }
         }
     }

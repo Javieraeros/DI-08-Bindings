@@ -11,9 +11,36 @@
         <vm:VMStarWars></vm:VMStarWars>
     </Page.DataContext>
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Orientation="Horizontal">
+        <!--Lista Trilogías-->
         <ListView Name="listaTrilogias"
                   ItemsSource="{Binding Trilogias}" 
-                  SelectedItem="{Binding TrilogiaSeleccionada,Mode=TwoWay}">
+                  SelectedItem="{Binding TrilogiaSeleccionada,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nombre}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <!--Lista Películas-->
+        <ListView Name="listaPeliculas"
+                  ItemsSource="{Binding Peliculas}"
+                  SelectedItem="{Binding PeliculaSeleccionada,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nombre}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--Lista Personajes-->
+        <ListView Name="listaPersonajes"
+                  ItemsSource="{Binding Personajes}"
+                  SelectedItem="{Binding PersonajeSeleccionado,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
