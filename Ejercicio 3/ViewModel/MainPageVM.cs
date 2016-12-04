@@ -13,8 +13,15 @@ namespace Ejercicio_3.ViewModel
         #region "Atributos"
         private static Persona personaSeleccionada;
         private static ObservableCollection<Persona> listado;
-        //Esta copia no se modificará nunca, pues será donde guardemos todas las personas de la base de datos
-        //Mientras que en el otro, solo guardaremos lo que estamos mostrando
+
+        /* Esta copia no se modificará nunca, pues será donde guardemos todas las personas de la base de datos
+         * Mientras que en el otro, solo guardaremos lo que estamos mostrando
+         * 
+         * El problema es que si hay una modificación en la BBDD el usuario no lo verá hasta que no reinicie
+         * la app. 
+         * Creo que lo mejor será crear un método qeu te devuelva el número de personas que hay en la BBDD
+         * (Select count(*) from personas) y si ese número no coincide con listado.size, inicializar dicho listado.
+         */
         private static ObservableCollection<Persona> listadoCopia;
         private string _textoABuscar;
         private string _textoABuscarActualizable;
@@ -164,41 +171,4 @@ namespace Ejercicio_3.ViewModel
         }
         #endregion
     }
-    /// <summary>
-    /// Aquí se harán todos los cambios que queremos de la clase persona, como por ejemplo
-    /// validación o cambios en setters y getters
-    /// </summary>
-    /*public class MainPageVM : Persona,INotifyPropertyChanged
-    {
-        private ObservableCollection<Persona> listado;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public MainPageVM()
-        {
-            this.listado = new ListadoPersona().getListado();
-        }
-        
-
-
-        public ObservableCollection<Persona> Listado
-        {
-            get
-            {
-                return listado;
-            }
-            set
-            {
-                listado = value;
-            }
-        }
-
-        protected void onPropertyChanged(String name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-    }*/
 }

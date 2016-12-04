@@ -37,14 +37,21 @@ namespace Ejercicio_3
             //this.ViewModel = (MainPageVM)this.DataContext;
 
         }
-        /*
-        private void Save_Click(object sender, RoutedEventArgs e)
+
+        private void lista_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            this.txtNombre.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            this.txtApellidos.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            this.txtFechaNacimiento.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            this.txtDiorección.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            this.txtTeléfono.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }*/
+            ListView list = (ListView)sender;
+            MiMenu.ShowAt(list, e.GetPosition(list));
+            var a=((FrameworkElement)e.OriginalSource).DataContext;
+        }
+        /*
+private void Save_Click(object sender, RoutedEventArgs e)
+{
+   this.txtNombre.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+   this.txtApellidos.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+   this.txtFechaNacimiento.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+   this.txtDiorección.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+   this.txtTeléfono.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+}*/
     }
 }
