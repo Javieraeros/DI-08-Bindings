@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ejercicio_3.Model.DAL;
 
 namespace Ejercicio_3.ViewModel
 {
+    //TODO Usar la BL!!
     public class MainPageVM : clsVMBase
     {
         #region "Atributos"
@@ -35,9 +37,8 @@ namespace Ejercicio_3.ViewModel
         #region "Constructores"
         public MainPageVM()
         {
-            listado = new ListadoPersona().getListado();
-            //No pongo listadoCopia=listado; por si hace referencia
-            listadoCopia = new ListadoPersona().getListado();
+            recuperaListado();
+
             _eliminarCommand = new DelegateCommand(EliminarCommand_Execute, EliminarCommand_CanExecute);
             _buscarCommand = new DelegateCommand(BuscarCommand_Execute, BuscarCommand_CanExecute);
         }
@@ -104,6 +105,15 @@ namespace Ejercicio_3.ViewModel
             listado.Remove(personaSeleccionada);
         }
 
+        public async void recuperaListado()
+        {
+            ListadoPersona miLista = new ListadoPersona();
+            listado =await miLista.getListado();
+            //No pongo listadoCopia=listado; por si hace referencia
+            //TODO Cambiar para que no vuelva a llmar
+            listadoCopia =await miLista.getListado();
+            NotifyPropertyChanged("Listado");
+        }
 
         public DelegateCommand eliminarCommand
         {
@@ -150,8 +160,7 @@ namespace Ejercicio_3.ViewModel
                 Listado = new ObservableCollection<Persona>(_listaActualizada);
             }else
             {
-                ListadoPersona listados = new ListadoPersona();
-                Listado = listados.getListado();
+                recuperaListado();
             }
         }
 
@@ -165,8 +174,7 @@ namespace Ejercicio_3.ViewModel
             }
             else
             {
-                ListadoPersona listados = new ListadoPersona();
-                Listado = listados.getListado();
+                recuperaListado();
             }
         }
         #endregion

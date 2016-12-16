@@ -95,8 +95,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\BL\ListadoPersonaBL.cs" />
+    <Compile Include="Model\BL\ManejadoraPersonaBL.cs" />
     <Compile Include="Model\clsPersona.cs" />
-    <Compile Include="Model\ListadoPersona.cs" />
+    <Compile Include="Model\DAL\Conexion.cs" />
+    <Compile Include="Model\DAL\ListadoPersona.cs" />
+    <Compile Include="Model\DAL\ManejadoraPersona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\clsVMBase.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
