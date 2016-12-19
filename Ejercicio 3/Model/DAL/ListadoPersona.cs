@@ -13,7 +13,10 @@ namespace Ejercicio_3.Model.DAL
     /// </summary>
     public class ListadoPersona
     {
-     
+
+        Conexion miCone = new Conexion();
+        HttpClient miHTTPClient = new HttpClient();
+
         public async Task<ObservableCollection<Persona>> getListado()
         {
             ObservableCollection<Persona> listado = new ObservableCollection<Persona>();
@@ -26,8 +29,7 @@ namespace Ejercicio_3.Model.DAL
             listado.Add(Fernando); listado.Add(Yo);
             listado.Add(Tu); listado.Add(El);
             listado.Add(Ella);*/
-            Conexion miCone = new Conexion();
-            HttpClient miHTTPClient = new HttpClient();
+           
 
             //ToDo Filtro!
             try
