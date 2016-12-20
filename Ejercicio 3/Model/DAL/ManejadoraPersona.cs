@@ -11,7 +11,6 @@ namespace Ejercicio_3.Model.DAL
     public class ManejadoraPersona
     {
         Conexion miCone = new Conexion();
-        HttpClient miHTTPClient = new HttpClient();
 
         //TODO
         /// <summary>
@@ -21,6 +20,7 @@ namespace Ejercicio_3.Model.DAL
         /// <returns></returns>
         public async Task<HttpStatusCode> deletePersona(int id)
         {
+            HttpClient miHTTPClient = new HttpClient();
             HttpStatusCode miStatuscode = new HttpStatusCode();
 
             try
@@ -43,9 +43,22 @@ namespace Ejercicio_3.Model.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<Persona> getPersona(int id)
+        public async Task<Persona> getPersona(int id)
         {
-            //ToDo
+            Persona persona;
+            HttpClient miHTTPClient = new HttpClient();
+            try
+            {
+                string respuesta = await miHTTPClient.GetStringAsync(miCone.laUri);
+                miHTTPClient.Dispose();
+                persona = JsonConvert.DeserializeObject<Persona>(respuesta);
+            }
+            catch (Exception)
+            {
+                //TODO
+                throw;
+            }
+            return persona;
         }
 
         /// <summary>
@@ -55,6 +68,7 @@ namespace Ejercicio_3.Model.DAL
         /// <returns></returns>
         public async Task<HttpStatusCode> postPersona(Persona p)
         {
+            HttpClient miHTTPClient = new HttpClient();
             HttpStatusCode miStatuscode = new HttpStatusCode();
             String body = "";
             HttpStringContent contenido;
@@ -62,7 +76,7 @@ namespace Ejercicio_3.Model.DAL
             {
                 body = JsonConvert.SerializeObject(p);
                 contenido = new HttpStringContent(body,Windows.Storage.Streams.UnicodeEncoding.Utf8,"application/json");
-                await miHTTPClient.PostAsync(new Uri(miCone.laUri),);
+                await miHTTPClient.PostAsync(miCone.laUri,contenido);
                 miStatuscode = HttpStatusCode.Accepted;
                 miHTTPClient.Dispose();
             }
@@ -80,9 +94,27 @@ namespace Ejercicio_3.Model.DAL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public Task<HttpStatusCode> putPersona(Persona p)
+        public async Task<HttpStatusCode> putPersona(Persona p)
         {
+            HttpClient miHTTPClient = new HttpClient();
+            HttpStatusCode miStatuscode = new HttpStatusCode();
+            String body = "";
+            HttpStringContent contenido;
+            try
+            {
+                body = JsonConvert.SerializeObject(p);
+                contenido = new HttpStringContent(body, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json");
+                await miHTTPClient.PutAsync(new Uri(miCone.laUri+"/"+p.id), contenido);
+                miStatuscode = HttpStatusCode.Accepted;
+                miHTTPClient.Dispose();
+            }
+            catch (Exception)
+            {
 
+                miStatuscode = HttpStatusCode.BadRequest;
+            }
+
+            return miStatuscode;
         }
 
     }

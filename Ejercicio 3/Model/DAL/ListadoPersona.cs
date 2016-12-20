@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Windows.Web.Http;
+using Windows.Web.Http.Filters;
 
 namespace Ejercicio_3.Model.DAL
 {
@@ -14,11 +15,17 @@ namespace Ejercicio_3.Model.DAL
     public class ListadoPersona
     {
 
-        Conexion miCone = new Conexion();
-        HttpClient miHTTPClient = new HttpClient();
 
         public async Task<ObservableCollection<Persona>> getListado()
         {
+
+            Conexion miCone = new Conexion();
+            
+            HttpBaseProtocolFilter filtro = new HttpBaseProtocolFilter();
+            filtro.CacheControl.ReadBehavior = HttpCacheReadBehavior.MostRecent;
+            filtro.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+
+            HttpClient miHTTPClient = new HttpClient(filtro);
             ObservableCollection<Persona> listado = new ObservableCollection<Persona>();
             /*Persona Fernando = new Persona(0, "Fernando", "Galiana", new DateTime(1980, 12, 12), "Su casa", "Su teléfono");
             Persona Yo = new Persona(1, "Francisco Javier", "Ruiz", new DateTime(1992, 11, 19), "Mi casa", "Teléeeeefono");
@@ -29,9 +36,8 @@ namespace Ejercicio_3.Model.DAL
             listado.Add(Fernando); listado.Add(Yo);
             listado.Add(Tu); listado.Add(El);
             listado.Add(Ella);*/
-           
 
-            //ToDo Filtro!
+
             try
             {
                 string respuesta = await miHTTPClient.GetStringAsync(miCone.laUri);

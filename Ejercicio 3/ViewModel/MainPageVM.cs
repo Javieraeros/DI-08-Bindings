@@ -6,10 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ejercicio_3.Model.DAL;
+using Ejercicio_3.Model.BL;
+using Windows.Web.Http;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Popups;
 
 namespace Ejercicio_3.ViewModel
 {
-    //TODO Usar la BL!!
+    //TODO Falta crear uno nuevo
     public class MainPageVM : clsVMBase
     {
         #region "Atributos"
@@ -31,6 +35,8 @@ namespace Ejercicio_3.ViewModel
         private DelegateCommand _eliminarCommand;
 
         private DelegateCommand _buscarCommand;
+        private DelegateCommand _guardarCommand;
+        private ManejadoraPersonaBL miMane;
 
         #endregion
 
@@ -38,9 +44,11 @@ namespace Ejercicio_3.ViewModel
         public MainPageVM()
         {
             recuperaListado();
+            miMane = new ManejadoraPersonaBL();
 
             _eliminarCommand = new DelegateCommand(EliminarCommand_Execute, EliminarCommand_CanExecute);
             _buscarCommand = new DelegateCommand(BuscarCommand_Execute, BuscarCommand_CanExecute);
+            _guardarCommand = new DelegateCommand(GuardarCommand_Execute, GuardarCommand_CanExecute);
         }
 
         #endregion
@@ -56,6 +64,7 @@ namespace Ejercicio_3.ViewModel
             {
                 personaSeleccionada = value;
                 _eliminarCommand.RaiseCanExecuteChanged();
+                _guardarCommand.RaiseCanExecuteChanged();
                 NotifyPropertyChanged("PersonaSeleccionada");
             }
         }
@@ -97,24 +106,6 @@ namespace Ejercicio_3.ViewModel
             }
         }
 
-        #endregion
-
-        #region "Métodos"
-        public void eliminar()
-        {
-            listado.Remove(personaSeleccionada);
-        }
-
-        public async void recuperaListado()
-        {
-            ListadoPersona miLista = new ListadoPersona();
-            listado =await miLista.getListado();
-            //No pongo listadoCopia=listado; por si hace referencia
-            //TODO Cambiar para que no vuelva a llmar
-            listadoCopia =await miLista.getListado();
-            NotifyPropertyChanged("Listado");
-        }
-
         public DelegateCommand eliminarCommand
         {
             get
@@ -131,6 +122,34 @@ namespace Ejercicio_3.ViewModel
             }
         }
 
+        public DelegateCommand guardarCommand
+        {
+            get
+            {
+                return _guardarCommand;
+            }
+        }
+
+        #endregion
+
+        #region "Métodos"
+        public async void eliminar()
+        {
+            await miMane.deletePersona(personaSeleccionada.id);
+        }
+
+        public async void recuperaListado()
+        {
+            ListadoPersonaBL miLista = new ListadoPersonaBL();
+            listado =await miLista.getListado();
+            //No pongo listadoCopia=listado; por si hace referencia
+            //TODO Cambiar para que no vuelva a llmar
+            listadoCopia =await miLista.getListado();
+            NotifyPropertyChanged("Listado");
+        }
+
+        
+
         private bool EliminarCommand_CanExecute()
         {
             bool sePuedeBorrar = true;
@@ -141,9 +160,41 @@ namespace Ejercicio_3.ViewModel
             return sePuedeBorrar;
         }
 
-        private void EliminarCommand_Execute()
+        private async void EliminarCommand_Execute()
         {
-            listado.Remove(personaSeleccionada);
+            HttpStatusCode resultado= await miMane.deletePersona(personaSeleccionada.id);
+            if (resultado == HttpStatusCode.Accepted)
+            {
+                recuperaListado();
+            }else
+            {
+                MessageDialog error = new MessageDialog("Error");
+                recuperaListado();
+            }
+        }
+
+        private bool GuardarCommand_CanExecute()
+        {
+            bool sePuedeBorrar = true;
+            if (personaSeleccionada == null)
+            {
+                sePuedeBorrar = false;
+            }
+            return sePuedeBorrar;
+        }
+
+        private async void GuardarCommand_Execute()
+        {
+            HttpStatusCode resultado = await miMane.putPersona(personaSeleccionada);
+            if (resultado == HttpStatusCode.Accepted)
+            {
+                recuperaListado();
+            }
+            else
+            {
+                MessageDialog error = new MessageDialog("Error");
+                recuperaListado();
+            }
         }
 
         private bool BuscarCommand_CanExecute()

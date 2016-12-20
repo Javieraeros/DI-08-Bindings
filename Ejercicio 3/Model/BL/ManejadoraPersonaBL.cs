@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ejercicio_3.Model.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +10,16 @@ namespace Ejercicio_3.Model.BL
 {
     public class ManejadoraPersonaBL
     {
+        ManejadoraPersona miMane = new ManejadoraPersona();
+
        /// <summary>
        /// 
        /// </summary>
        /// <param name="id"></param>
        /// <returns></returns>
-        public Task<Persona> getPersona(int id)
+        public async Task<Persona> getPersona(int id)
         {
-            //ToDo
+            return await miMane.getPersona(id);
         }
 
         /// <summary>
@@ -24,9 +27,9 @@ namespace Ejercicio_3.Model.BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public Task<HttpStatusCode> postPersona(Persona p)
+        public async Task<HttpStatusCode> postPersona(Persona p)
         {
-            //ToDo
+            return await miMane.postPersona(p);
         }
     
         /// <summary>
@@ -34,9 +37,9 @@ namespace Ejercicio_3.Model.BL
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public Task<HttpStatusCode> putPersona(Persona p)
+        public async Task<HttpStatusCode> putPersona(Persona p)
         {
-
+            return await miMane.putPersona(p);
         }
 
         /// <summary>
@@ -44,9 +47,9 @@ namespace Ejercicio_3.Model.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<HttpStatusCode> deletePersona(int id)
+        public async Task<HttpStatusCode> deletePersona(int id)
         {
-
+            return await miMane.deletePersona(id);
         }
     }
 }

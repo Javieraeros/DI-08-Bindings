@@ -34,7 +34,6 @@ namespace Ejercicio_3
             set
             {
                 this.nombre = value;
-                onPropertyChanged("Nombre");
             }
         }
 
